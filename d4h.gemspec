@@ -5,8 +5,8 @@ Gem::Specification.new do |spec|
   spec.version = "0.0.0"
   spec.authors = ["Pawel Osiczko"]
   spec.email = ["p.osiczko@tetrapyloctomy.org"]
-  spec.homepage = ""
-  spec.summary = ""
+  spec.homepage = "https://github.com/rockymountainrescue/d4h"
+  spec.summary = "D4H API in Ruby"
   spec.license = "Hippocratic-2.1"
 
   spec.metadata = {"label" => "D4H", "rubygems_mfa_required" => "true"}
