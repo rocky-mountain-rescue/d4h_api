@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |spec|
-  spec.name = "d4h_api"
+  spec.name = "d4h"
   spec.version = "0.0.0"
   spec.authors = ["Pawel Osiczko"]
   spec.email = ["p.osiczko@tetrapyloctomy.org"]
@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary = ""
   spec.license = "Hippocratic-2.1"
 
-  spec.metadata = {"label" => "D4h Api", "rubygems_mfa_required" => "true"}
+  spec.metadata = {"label" => "D4H", "rubygems_mfa_required" => "true"}
 
   spec.signing_key = Gem.default_key_path
   spec.cert_chain = [Gem.default_cert_path]
@@ -20,4 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.extra_rdoc_files = Dir["README*", "LICENSE*"]
   spec.files = Dir["*.gemspec", "lib/**/*"]
+
+  spec.add_dependency "faraday", "~> 2.7.4"
+  spec.add_dependency "dotenv", "~> 2.8.1"
 end

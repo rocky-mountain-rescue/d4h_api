@@ -4,7 +4,11 @@
 require "bundler/setup"
 Bundler.require :tools
 
-require_relative "../lib/d4h_api"
+require_relative "../lib/d4h"
+require "dotenv/load"
 require "irb"
+
+Dotenv.load
+@client = D4H::Client.new(api_key: ENV["D4H_TOKEN"])
 
 IRB.start __FILE__

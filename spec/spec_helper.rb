@@ -14,7 +14,7 @@ unless ENV["NO_COVERAGE"]
   end
 end
 
-require "d4h_api"
+require "d4h/api"
 require "refinements"
 
 SPEC_ROOT = Pathname(__dir__).realpath.freeze

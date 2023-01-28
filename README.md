@@ -35,13 +35,18 @@ To set up the project, run:
 
 ## Usage
 
+```ruby
+client = D4H::Client.new(bearer_token: "")
+client.team
+
+```
 ## Development
 
 To contribute, run:
 
 ``` bash
 git clone 
-cd d4h_api
+cd d4h
 bin/setup
 ```
 
