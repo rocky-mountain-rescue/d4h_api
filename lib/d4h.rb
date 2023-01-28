@@ -15,7 +15,7 @@ module D4H
   autoload :Resource, "d4h/resource"
 
   autoload :Event, "d4h/models/event"
-  autoload :EventResource, "d4h/resources/event"
+  autoload :EventResource, "d4h/resources/event_resource"
   autoload :Team, "d4h/models/team"
-  autoload :TeamResource, "d4h/resources/team"
+  autoload :TeamResource, "d4h/resources/team_resource"
 end
