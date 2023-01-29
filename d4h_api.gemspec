@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |spec|
-  spec.name = "d4h"
+  spec.name = "d4h_api"
   spec.version = "0.0.0"
   spec.authors = ["Pawel Osiczko"]
   spec.email = ["p.osiczko@tetrapyloctomy.org"]

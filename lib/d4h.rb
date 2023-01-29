@@ -4,18 +4,21 @@ require "zeitwerk"
 
 Zeitwerk::Loader.for_gem.then do |loader|
   loader.inflector.inflect "d4h" => "D4H"
+  loader.inflector.inflect "api" => "API"
   loader.setup
 end
 
 # Main namespace.
 module D4H
-  autoload :Client, "d4h/client"
-  autoload :Error, "d4h/error"
-  autoload :Model, "d4h/model"
-  autoload :Resource, "d4h/resource"
+  module API
+    autoload :Client, "d4h/api/client"
+    autoload :Error, "d4h/api/error"
+    autoload :Model, "d4h/api/model"
+    autoload :Resource, "d4h/api/resource"
 
-  autoload :Event, "d4h/models/event"
-  autoload :EventResource, "d4h/resources/event_resource"
-  autoload :Team, "d4h/models/team"
-  autoload :TeamResource, "d4h/resources/team_resource"
+    autoload :Event, "d4h/api/models/event"
+    autoload :EventResource, "d4h/api/resources/event_resource"
+    autoload :Team, "d4h/api/models/team"
+    autoload :TeamResource, "d4h/api/resources/team_resource"
+  end
 end

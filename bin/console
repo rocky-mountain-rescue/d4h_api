@@ -9,6 +9,6 @@ require "dotenv/load"
 require "irb"
 
 Dotenv.load
-@client = D4H::Client.new(api_key: ENV["D4H_TOKEN"])
+@client = D4H::API::Client.new(api_key: ENV["D4H_TOKEN"])
 
 IRB.start __FILE__
