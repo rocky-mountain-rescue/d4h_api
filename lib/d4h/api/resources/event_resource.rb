@@ -25,8 +25,8 @@ module D4H
         Event.new response.body
       end
 
-      def create(**attributes)
-        post_request("events",)
+      def create(data)
+        post_request("team/events", body: data)
       end
     end
   end

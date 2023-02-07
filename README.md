@@ -1,21 +1,21 @@
-# D4h Api
+# D4H API
 
 <!-- Tocer[start]: Auto-generated, don't remove. -->
 
 ## Table of Contents
 
-  - [Features](#features)
-  - [Screencasts](#screencasts)
-  - [Requirements](#requirements)
-  - [Setup](#setup)
-  - [Usage](#usage)
-  - [Development](#development)
-  - [Tests](#tests)
-  - [[License]()](#license)
-  - [[Security]()](#security)
-  - [[Contributions]()](#contributions)
-  - [[Versions]()](#versions)
-  - [Credits](#credits)
+- [Features](#features)
+- [Screencasts](#screencasts)
+- [Requirements](#requirements)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Development](#development)
+- [Tests](#tests)
+- [[License]()](#license)
+- [[Security]()](#security)
+- [[Contributions]()](#contributions)
+- [[Versions]()](#versions)
+- [Credits](#credits)
 
 <!-- Tocer[finish]: Auto-generated, don't remove. -->
 
@@ -40,6 +40,7 @@ client = D4H::Client.new(bearer_token: "")
 client.team
 
 ```
+
 ## Development
 
 To contribute, run:
