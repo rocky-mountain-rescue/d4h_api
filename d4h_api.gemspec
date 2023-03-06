@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name     = "d4h_api"
-  spec.version  = "0.0.1"
+  spec.version  = "0.0.2"
   spec.authors  = ["Pawel Osiczko"]
   spec.email    = ["p.osiczko@tetrapyloctomy.org"]
   spec.homepage = "https://github.com/rockymountainrescue/d4h"
@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.signing_key = Gem.default_key_path
   spec.cert_chain  = [Gem.default_cert_path]
 
-  spec.required_ruby_version = "~> 3.2"
+  spec.required_ruby_version = "~> 3.2.1"
   spec.add_dependency "refinements", "~> 10.0"
   spec.add_dependency "zeitwerk", "~> 2.6"
 
