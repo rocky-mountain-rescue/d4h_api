@@ -33,6 +33,10 @@ module D4H
         CustomFieldResource.new(self)
       end
 
+      def custom_field_for_entity
+        CustomFieldForEntityResource.new(self)
+      end
+
       def inspect
         "#<D4H::Client>"
       end

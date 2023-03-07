@@ -22,5 +22,7 @@ module D4H
     autoload :TeamResource, "d4h/api/resources/team_resource"
     autoload :CustomField, "d4h/api/models/custom_field"
     autoload :CustomFieldResource, "d4h/api/resources/custom_field_resource"
+    autoload :CustomFieldForEntity, "d4h/api/models/custom_field_for_entity"
+    autoload :CustomFieldForEntityResource, "d4h/api/resources/custom_field_resource_for_entity"
   end
 end
