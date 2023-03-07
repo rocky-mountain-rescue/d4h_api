@@ -29,6 +29,10 @@ module D4H
         EventResource.new(self)
       end
 
+      def custom_field
+        CustomFieldResource.new(self)
+      end
+
       def inspect
         "#<D4H::Client>"
       end

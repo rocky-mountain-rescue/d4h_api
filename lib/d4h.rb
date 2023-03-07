@@ -20,5 +20,7 @@ module D4H
     autoload :EventResource, "d4h/api/resources/event_resource"
     autoload :Team, "d4h/api/models/team"
     autoload :TeamResource, "d4h/api/resources/team_resource"
+    autoload :CustomField, "d4h/api/models/custom_field"
+    autoload :CustomFieldResource, "d4h/api/resources/custom_field_resource"
   end
 end
