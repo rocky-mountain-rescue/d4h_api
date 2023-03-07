@@ -3,11 +3,11 @@ module D4H
     class CustomFieldResource < Resource
       SUB_URL = "team/custom-fields"
 
-      def list(**params)
+      def get(**params)
         CustomField.new get_request(SUB_URL, params: params).body
       end
 
-      def list_all(**params)
+      def get_all(**params)
         params[:limit] = 250 unless params.has_key?(:limit)
         response       = get_request(SUB_URL, params: params)
 
@@ -17,8 +17,8 @@ module D4H
 
         # keep looping until response_event_count is less than params[:limit]
         # or response_event_count is 0
-        while !(response_event_count == 0) && !(response_event_count < params[:limit])
-          response             = get_request("team/custom-fields", params: params.merge(offset: response_event_total))
+        while (response_event_count != 0) && (response_event_count >= params[:limit])
+          response             = get_request(SUB_URL, params: params.merge(offset: response_event_total))
           all_response_data    += response.body["data"]
           response_event_count = response.body["data"].count
           response_event_total += response_event_count
