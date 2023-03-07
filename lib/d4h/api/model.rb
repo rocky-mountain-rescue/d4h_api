@@ -17,6 +17,14 @@ module D4H
           obj
         end
       end
+
+      def success?
+        (200..299).include? statusCode
+      end
+
+      def failure?
+        not success?
+      end
     end
   end
 end
