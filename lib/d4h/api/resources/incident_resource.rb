@@ -33,7 +33,7 @@ module D4H
       end
 
       def update(**params)
-        Incident.new put_request("#{SUB_URL}/#{params[:id]}", body: body)
+        Incident.new put_request("#{SUB_URL}/#{params[:id]}", body: params.except(:id)).body
       end
 
       def create(data)

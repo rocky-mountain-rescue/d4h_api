@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module D4H
   module API
     class TeamResource < Resource
-      def details
+      def show
         Team.new get_request("team").body
       end
     end
