@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "faraday"
 require "faraday/middleware"
 
@@ -21,14 +23,6 @@ module D4H
         end
       end
 
-      def team
-        TeamResource.new(self)
-      end
-
-      def event
-        EventResource.new(self)
-      end
-
       def custom_field
         CustomFieldResource.new(self)
       end
@@ -37,8 +31,20 @@ module D4H
         CustomFieldForEntityResource.new(self)
       end
 
+      def event
+        EventResource.new(self)
+      end
+
+      def incident
+        IncidentResource.new(self)
+      end
+
       def inspect
         "#<D4H::Client>"
+      end
+
+      def team
+        TeamResource.new(self)
       end
     end
   end
