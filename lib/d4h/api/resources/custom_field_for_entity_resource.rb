@@ -7,7 +7,7 @@ module D4H
 
       def list(**params)
         sub_url = "#{SUB_URL}/#{params[:entity]}/#{params[:entity_id]}"
-        CustomField.new get_request(sub_url, params: params).body
+        CustomFieldForEntity.new get_request(sub_url, params: params.except(:entity, :entity_id)).body
       end
 
       def list_all(**params)
@@ -17,7 +17,7 @@ module D4H
           params[:limit] = 250
         end
 
-        response = get_request(sub_url, params: params)
+        response = get_request(sub_url, params: params.except(:entity, :entity_id))
 
         response_count        = response.body["data"].count
         response_total        = response_count
@@ -26,18 +26,19 @@ module D4H
         # keep looping until response_count is less than params[:limit]
         # or response_count is 0
         while (response_count != 0) && (response_count >= params[:limit])
-          response          = get_request(sub_url, params: params.merge(offset: response_total))
+          response          = get_request(sub_url,
+                                          params: params.except(:entity, :entity_id).merge(offset: response_total))
           all_response_data += response.body["data"]
           response_count    = response.body["data"].count
           response_total    += response_count
         end
         response.body["data"] = all_response_data
-        CustomField.new response.body
+        CustomFieldForEntity.new response.body
       end
 
-      def update(**params)
-        sub_url = "#{SUB_URL}/#{params[:entity]}/#{params[:entity_id]}"
-        put_request(sub_url, body: params.except(:entity, :entity_id))
+      def update(body:, entity:, entity_id:)
+        sub_url = "#{SUB_URL}/#{entity}/#{entity_id}"
+        CustomFieldForEntity.new put_request(sub_url, body: body).body
       end
     end
   end

@@ -19,7 +19,7 @@ module D4H
     autoload :CustomField, "d4h/api/models/custom_field"
     autoload :CustomFieldResource, "d4h/api/resources/custom_field_resource"
     autoload :CustomFieldForEntity, "d4h/api/models/custom_field_for_entity"
-    autoload :CustomFieldForEntityResource, "d4h/api/resources/custom_field_resource_for_entity"
+    autoload :CustomFieldForEntityResource, "d4h/api/resources/custom_field_for_entity_resource"
     autoload :Incident, "d4h/api/models/incident"
     autoload :IncidentResource, "d4h/api/resources/incident_resource"
     autoload :Event, "d4h/api/models/event"

@@ -33,7 +33,7 @@ module D4H
       end
 
       def create(data)
-        post_request(SUB_URL, body: data)
+        Event.new post_request(SUB_URL, body: data).body
       end
     end
   end
