@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "ostruct"
 
 module D4H
   module API
     class Model < OpenStruct
       def initialize(attributes)
-        super to_ostruct(attributes)
+        super(to_ostruct(attributes))
       end
 
       def to_ostruct(obj)
@@ -19,11 +21,11 @@ module D4H
       end
 
       def success?
-        (200..299).include? statusCode
+        (200..299).cover?(statusCode)
       end
 
       def failure?
-        not success?
+        !success?
       end
     end
   end

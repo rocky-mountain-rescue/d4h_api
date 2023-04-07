@@ -16,10 +16,10 @@ module D4H
 
       def connection
         @connection ||= Faraday.new do |connection|
-          connection.adapter adapter
+          connection.adapter(adapter)
           connection.url_prefix = BASE_URL
-          connection.request :url_encoded
-          connection.response :json, content_type: "application/json"
+          connection.request(:url_encoded)
+          connection.response(:json, content_type: "application/json")
         end
       end
 
