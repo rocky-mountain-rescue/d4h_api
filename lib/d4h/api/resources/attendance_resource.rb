@@ -6,7 +6,7 @@ module D4H
       SUB_URL = "team/attendance"
 
       def list(**params)
-        Member.new(get_request(SUB_URL, params: params).body)
+        Attendance.new(get_request(SUB_URL, params: params).body)
       end
 
       def list_all(**params)
@@ -30,15 +30,15 @@ module D4H
         end
 
         response.body["data"] = all_response_data
-        Member.new(response.body)
+        Attendance.new(response.body)
       end
 
       def update(**params)
-        Member.new(put_request("#{SUB_URL}/#{params[:id]}", body: params.except(:id)).body)
+        Attendance.new(put_request("#{SUB_URL}/#{params[:id]}", body: params.except(:id)).body)
       end
 
       def create(data)
-        Member.new(post_request(SUB_URL, body: data).body)
+        Attendance.new(post_request(SUB_URL, body: data).body)
       end
     end
   end
