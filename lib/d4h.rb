@@ -16,6 +16,9 @@ module D4H
     autoload :Model, "d4h/api/model"
     autoload :Resource, "d4h/api/resource"
 
+    autoload :Attendance, "d4h/api/models/attendance"
+    autoload :AttendanceResource, "d4h/api/resources/attendance_resource"
+
     autoload :CustomField, "d4h/api/models/custom_field"
     autoload :CustomFieldResource, "d4h/api/resources/custom_field_resource"
 

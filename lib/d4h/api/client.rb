@@ -23,6 +23,10 @@ module D4H
         end
       end
 
+      def attendance
+        AttendanceResource.new(self)
+      end
+
       def custom_field
         CustomFieldResource.new(self)
       end
@@ -41,6 +45,10 @@ module D4H
 
       def inspect
         "#<D4H::Client>"
+      end
+
+      def member
+        MemberResource.new(self)
       end
 
       def team
