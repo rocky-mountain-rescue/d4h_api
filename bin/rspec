@@ -3,4 +3,4 @@
 
 require "bundler/setup"
 
-load Gem.bin_path("rspec-core", "rspec")
+load(Gem.bin_path("rspec-core", "rspec"))

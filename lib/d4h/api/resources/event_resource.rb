@@ -16,9 +16,9 @@ module D4H
 
         response = get_request(SUB_URL, params: params)
 
-        response_count        = response.body["data"].count
-        response_total        = response_count
-        all_response_data     = response.body["data"]
+        response_count = response.body["data"].count
+        response_total = response_count
+        all_response_data = response.body["data"]
 
         # keep looping until response_count is less than params[:limit]
         # or response_count is 0
@@ -28,6 +28,7 @@ module D4H
           response_count = response.body["data"].count
           response_total += response_count
         end
+
         response.body["data"] = all_response_data
         Event.new(response.body)
       end

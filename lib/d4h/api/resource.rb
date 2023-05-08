@@ -31,7 +31,7 @@ module D4H
 
       def default_headers
         {
-          Authorization: "Bearer #{client.api_key}",
+          Authorization: "Bearer #{client.api_key}"
         }
       end
 
@@ -51,6 +51,7 @@ module D4H
         when 500
           raise Error, message
         end
+
         response
       end
 

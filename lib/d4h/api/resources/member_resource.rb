@@ -28,6 +28,7 @@ module D4H
           response_count = response.body["data"].count
           response_total += response_count
         end
+
         response.body["data"] = all_response_data
         Member.new(response.body)
       end

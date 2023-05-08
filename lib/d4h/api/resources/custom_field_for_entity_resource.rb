@@ -19,21 +19,22 @@ module D4H
 
         response = get_request(sub_url, params: params.except(:entity, :entity_id))
 
-        response_count        = response.body["data"].count
-        response_total        = response_count
-        all_response_data     = response.body["data"]
+        response_count = response.body["data"].count
+        response_total = response_count
+        all_response_data = response.body["data"]
 
         # keep looping until response_count is less than params[:limit]
         # or response_count is 0
         while (response_count != 0) && (response_count >= params[:limit])
           response = get_request(
             sub_url,
-            params: params.except(:entity, :entity_id).merge(offset: response_total),
+            params: params.except(:entity, :entity_id).merge(offset: response_total)
           )
           all_response_data += response.body["data"]
           response_count = response.body["data"].count
           response_total += response_count
         end
+
         response.body["data"] = all_response_data
         CustomFieldForEntity.new(response.body)
       end
