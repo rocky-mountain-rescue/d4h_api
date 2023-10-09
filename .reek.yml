@@ -1,3 +1,39 @@
+---
 exclude_paths:
   - tmp
   - vendor
+
+detectors:
+  #
+  # Project rules
+  #
+  UncommunicativeModuleName:
+    accept:
+      - Active911
+  DataClump:
+    enabled: true
+    exclude:
+      - FixtureWrapper
+      - Active911::API::Resource
+  FeatureEnvy:
+    enabled: true
+    exclude:
+      - Active911::API::Client
+      - Active911::API::Resource
+  #
+  # Global Rules
+  #
+  LongParameterList:
+    max_params: 4
+  NestedIterators:
+    enabled: true
+    exclude: [ ]
+    max_allowed_nesting: 2
+    ignore_iterators:
+      - tap
+  TooManyInstanceVariables:
+    max_instance_variables: 5
+  TooManyStatements:
+    max_statements: 15
+  UtilityFunction:
+    enabled: false
