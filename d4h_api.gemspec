@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = "d4h_api"
-  spec.version = "0.0.4"
+  spec.version = "0.0.5"
   spec.authors = ["Pawel Osiczko"]
   spec.email = ["p.osiczko@tetrapyloctomy.org"]
   spec.homepage = "https://github.com/rockymountainrescue/d4h_api"
