@@ -1,5 +1,9 @@
 # Versions
 
+## 2.1.0 (2026-03-10)
+
+- Switched Faraday request encoding from `url_encoded` to `json` in API client connection
+
 ## 2.0.1 (2026-03-10)
 
 - Made `context_id` optional on `Client` — only required for context-scoped resources
