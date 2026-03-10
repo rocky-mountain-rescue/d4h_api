@@ -1,5 +1,9 @@
 # Versions
 
+## 2.1.1 (2026-03-10)
+
+- Reverted Faraday request encoding from `json` back to `url_encoded` for D4H API compatibility
+
 ## 2.1.0 (2026-03-10)
 
 - Switched Faraday request encoding from `url_encoded` to `json` in API client connection
