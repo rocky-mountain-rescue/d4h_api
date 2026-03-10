@@ -106,7 +106,7 @@ module D4H
 
       # Public: Returns the memoized Faraday connection.
       #
-      # Configured with JSON request encoding, JSON response parsing,
+      # Configured with URL-encoded request encoding, JSON response parsing,
       # exponential backoff retry on transient errors, and the chosen adapter.
       #
       # The retry middleware retries on 429 and 5xx status codes up to
@@ -116,7 +116,7 @@ module D4H
       def connection
         @connection ||= Faraday.new do |f|
           f.url_prefix = base_url
-          f.request(:json)
+          f.request(:url_encoded)
           if max_retries > 0
             f.request(:retry,
               max: max_retries,
