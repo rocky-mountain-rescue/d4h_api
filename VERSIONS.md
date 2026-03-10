@@ -1,8 +1,8 @@
 # Versions
 
-## 2.1.1 (2026-03-10)
+## 2.2.0 (2026-03-10)
 
-- Reverted Faraday request encoding from `json` back to `url_encoded` for D4H API compatibility
+- Include validation issues from `detailObj.data.issues` in error messages (field paths and reasons)
 
 ## 2.1.0 (2026-03-10)
 

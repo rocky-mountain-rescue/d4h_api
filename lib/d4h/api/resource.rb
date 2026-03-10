@@ -128,7 +128,11 @@ module D4H
         return response if (200..299).cover?(response.status)
 
         body = response.body || {}
-        message = [body["title"], body["detail"], body["error"], body["message"]].compact.uniq.join(": ")
+        parts = [body["title"], body["detail"], body["error"], body["message"]].compact.uniq
+        if (issues = body.dig("detailObj", "data", "issues"))
+          issues.each { |issue| parts << "#{issue["path"]&.join(".")}: #{issue["message"]}" }
+        end
+        message = parts.join(": ")
 
         raise RetriableError, message if Client::RETRIABLE_STATUSES.include?(response.status)
 
