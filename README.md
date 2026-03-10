@@ -782,4 +782,4 @@ Hippocratic License 2.1
 
 ## Credits
 
-Engineered by [Pawel Osiczko](https://github.com/posiczko).
+Built by [Rocky Mountain Rescue Group](https://rockymountainrescue.org) and [Pawel Osiczko](https://github.com/posiczko).
