@@ -5,6 +5,7 @@
 - Made `context_id` optional on `Client` — only required for context-scoped resources
 - `whoami` now hits `v3/whoami` directly (no context prefix), matching the D4H API spec
 - A client created without `context_id` can call `whoami.show` for identity discovery; other resources raise `ArgumentError`
+- Error messages now include `title` and `detail` fields from D4H v3 API error responses
 
 ## 2.0.0 (2026-03-09)
 
