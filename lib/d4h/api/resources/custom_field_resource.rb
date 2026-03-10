@@ -3,38 +3,30 @@
 module D4H
   module API
     class CustomFieldResource < Resource
-      SUB_URL = "team/custom-fields"
+      SUB_URL = "custom-fields"
 
       def list(**params)
-        CustomField.new(get_request(SUB_URL, params: params).body)
+        Collection.new(get_request(resource_url, params: params).body, model_class: CustomField)
       end
 
       def list_all(**params)
-        unless params.key?(:limit)
-          params[:limit] = 250
-        end
+        paginate_all(params, model_class: CustomField)
+      end
 
-        response = get_request(SUB_URL, params: params)
-
-        response_count = response.body["data"].count
-        response_total = response_count
-        all_response_data = response.body["data"]
-
-        # keep looping until response_count is less than params[:limit]
-        # or response_count is 0
-        while (response_count != 0) && (response_count >= params[:limit])
-          response = get_request(SUB_URL, params: params.merge(offset: response_total))
-          all_response_data += response.body["data"]
-          response_count = response.body["data"].count
-          response_total += response_count
-        end
-
-        response.body["data"] = all_response_data
-        CustomField.new(response.body)
+      def show(id:)
+        CustomField.new(get_request("#{resource_url}/#{id}").body)
       end
 
       def create(data)
-        CustomField.new(post_request(SUB_URL, body: data).body)
+        CustomField.new(post_request(resource_url, body: data).body)
+      end
+
+      def update(id:, **params)
+        CustomField.new(patch_request("#{resource_url}/#{id}", body: params).body)
+      end
+
+      def destroy(id:)
+        delete_request("#{resource_url}/#{id}")
       end
     end
   end

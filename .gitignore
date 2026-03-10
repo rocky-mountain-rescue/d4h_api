@@ -1,5 +1,9 @@
 *.gem
 .bundle
+coverage/
 Gemfile.lock
 pkg
 tmp
+CLAUDE.md
+.env
+.env.*

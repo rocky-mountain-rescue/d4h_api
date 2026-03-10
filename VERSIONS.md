@@ -1,5 +1,24 @@
 # Versions
 
+## 2.0.0 (2026-03-09)
+
+- Migrated from D4H API v2 to v3 (new URL patterns, page-based pagination, Bearer auth)
+- Required Ruby >= 4.0
+- Replaced RSpec with Minitest
+- Added 56 resource endpoints covering the full D4H API surface
+- Added `Collection` class with `Enumerable` for paginated results
+- Added `list_all` auto-pagination on all list-capable resources
+- Updates use PATCH (except documents which use PUT)
+- Client now requires `context_id:` and supports `context:` ("team" or "organisation")
+- Added exponential backoff retry for transient errors (429, 500, 502, 503, 504) via `faraday-retry`
+- Added `RetriableError` subclass to distinguish transient from permanent failures
+- Configurable `max_retries:` (default 3) and `retry_interval:` (default 1s) on Client
+- Retry logs to stderr: `[D4H] Retry 1/3 for GET .../members ...`
+
+## 0.0.5 (2023-01-26)
+
+- Updated gem version.
+
 ## 0.0.0 (2023-01-26)
 
 - Added initial implementation.
