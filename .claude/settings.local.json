@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "mcp__jetbrains__list_directory_tree"
+      "mcp__jetbrains__list_directory_tree",
+      "WebFetch(domain:api.d4h.org)"
     ]
   }
 }

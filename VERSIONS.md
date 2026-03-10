@@ -1,5 +1,11 @@
 # Versions
 
+## 2.0.1 (2026-03-10)
+
+- Made `context_id` optional on `Client` — only required for context-scoped resources
+- `whoami` now hits `v3/whoami` directly (no context prefix), matching the D4H API spec
+- A client created without `context_id` can call `whoami.show` for identity discovery; other resources raise `ArgumentError`
+
 ## 2.0.0 (2026-03-09)
 
 - Migrated from D4H API v2 to v3 (new URL patterns, page-based pagination, Bearer auth)

@@ -6,7 +6,7 @@ module D4H
       SUB_URL = "whoami"
 
       def show
-        Whoami.new(get_request("#{base_path}/#{SUB_URL}").body)
+        Whoami.new(get_request("v3/#{SUB_URL}").body)
       end
     end
   end

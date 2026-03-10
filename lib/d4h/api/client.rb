@@ -17,6 +17,10 @@ module D4H
     #
     # Examples
     #
+    #   # Discover your identity (no context needed)
+    #   client = D4H::API::Client.new(api_key: ENV.fetch("D4H_TOKEN"))
+    #   me = client.whoami.show
+    #
     #   # Team context (default)
     #   client = D4H::API::Client.new(
     #     api_key:    ENV.fetch("D4H_TOKEN"),
@@ -44,7 +48,8 @@ module D4H
       #
       # api_key:        - A String Bearer token for API authentication.
       # context:        - The context scope, either "team" (default) or "organisation".
-      # context_id:     - The Integer ID of the team or organisation.
+      # context_id:     - The Integer ID of the team or organisation (optional;
+      #                   required for all resources except whoami).
       # base_url:       - The base URL for the D4H API. Defaults to D4H_BASE_URL env
       #                   var, or "https://api.team-manager.us.d4h.com" if unset.
       #                   Change this for EU or other regional endpoints.
@@ -54,7 +59,7 @@ module D4H
       #                   Set to 0 to disable retries.
       # retry_interval: - Float base interval in seconds between retries (default: 1).
       #                   Set to 0 in tests to avoid sleeping.
-      def initialize(api_key:, context: "team", context_id:,
+      def initialize(api_key:, context: "team", context_id: nil,
         base_url: ENV.fetch("D4H_BASE_URL", DEFAULT_BASE_URL),
         adapter: Faraday.default_adapter,
         max_retries: MAX_RETRIES, retry_interval: RETRY_INTERVAL)
@@ -72,7 +77,11 @@ module D4H
       # Examples
       #
       #   client.base_path  # => "v3/team/42"
+      #
+      # Raises ArgumentError if context_id is nil.
       def base_path
+        raise ArgumentError, "context_id is required for this resource" if context_id.nil?
+
         "v3/#{context}/#{context_id}"
       end
 

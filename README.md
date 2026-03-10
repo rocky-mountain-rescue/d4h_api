@@ -32,14 +32,16 @@ gem install d4h_api
 ```ruby
 require "d4h"
 
+# Discover your identity (no context_id needed)
+client = D4H::API::Client.new(api_key: ENV.fetch("D4H_TOKEN"))
+me = client.whoami.show
+puts "#{me.name} (#{me.email})"
+
+# Use context_id for all other resources
 client = D4H::API::Client.new(
   api_key:    ENV.fetch("D4H_TOKEN"),
   context_id: ENV.fetch("D4H_TEAM_ID").to_i,
 )
-
-# Who am I?
-me = client.whoami.show
-puts "#{me.name} (#{me.email})"
 
 # List all operational members
 members = client.member.list(status: "OPERATIONAL")
@@ -54,9 +56,13 @@ puts "#{team.title} — #{team.country}"
 
 ### Client Initialization
 
-The client requires an `api_key` and a `context_id` (your D4H team ID). The `context` defaults to `"team"` but can be set to `"organisation"` for organisation-scoped API calls.
+The client requires an `api_key`. The `context_id` (your D4H team or organisation ID) is optional — it is required for all resources except `whoami`, which can be used to discover your context. The `context` defaults to `"team"` but can be set to `"organisation"` for organisation-scoped API calls.
 
 ```ruby
+# Minimal client — only whoami is available (no context_id)
+client = D4H::API::Client.new(api_key: ENV.fetch("D4H_TOKEN"))
+me = client.whoami.show
+
 # Team context (default)
 client = D4H::API::Client.new(
   api_key:    ENV.fetch("D4H_TOKEN"),
@@ -85,7 +91,7 @@ The client reads the following environment variables as defaults. All can be ove
 | Variable       | Default                               | Constructor param | Description                                                               |
 |----------------|---------------------------------------|-------------------|---------------------------------------------------------------------------|
 | `D4H_TOKEN`    | *(required)*                          | `api_key:`        | Your D4H API Bearer token. Generate one in your [D4H account settings](https://support.d4h.com/en/articles/2334703-api-access). |
-| `D4H_TEAM_ID`  | *(required)*                          | `context_id:`     | Your D4H team (or organisation) numeric ID. Find it in your D4H URL or via the API. |
+| `D4H_TEAM_ID`  | *(optional)*                          | `context_id:`     | Your D4H team (or organisation) numeric ID. Required for all resources except `whoami`. Find it in your D4H URL or via the `whoami` endpoint. |
 | `D4H_BASE_URL` | `https://api.team-manager.us.d4h.com` | `base_url:`       | Base URL for the D4H API. Change for EU (`https://api.team-manager.eu.d4h.com`) or other regional endpoints. |
 
 A typical `.env` file:
@@ -137,7 +143,7 @@ client.equipment     # => EquipmentResource.new(client)
 client.event         # => EventResource.new(client)
 ```
 
-The client builds a **base path** from the context — `v3/team/42` for team context, `v3/organisation/99` for organisation context — which all resources prepend to their endpoint URLs.
+The client builds a **base path** from the context — `v3/team/42` for team context, `v3/organisation/99` for organisation context — which most resources prepend to their endpoint URLs. The `context_id` is optional; when omitted, only context-free resources like `whoami` (which uses `v3/whoami`) are available. Calling a context-scoped resource without a `context_id` raises `ArgumentError`.
 
 **`D4H::API::Resource`** is the base class for all 56 resource endpoints. It provides five HTTP verb methods (`get_request`, `post_request`, `put_request`, `patch_request`, `delete_request`), each of which injects the Bearer token header and checks the response status. Every subclass defines a `SUB_URL` constant and implements only the CRUD methods the D4H API supports for that resource:
 
@@ -211,7 +217,7 @@ client.event.update(id: 1, title: "Updated Training")
 client.tag.destroy(id: 5)
 ```
 
-Two special cases: `whoami.show` takes no arguments (it returns the authenticated user), and `document.update` uses HTTP PUT instead of PATCH per the D4H API contract.
+Two special cases: `whoami.show` takes no arguments and does not require a `context_id` (it hits `v3/whoami` directly to return the authenticated user), and `document.update` uses HTTP PUT instead of PATCH per the D4H API contract.
 
 ## Usage
 
@@ -351,17 +357,18 @@ If all retries are exhausted, the `RetriableError` propagates to your code so yo
 ### Team & Identity
 
 ```ruby
-# Show your team's info (requires the team's own ID)
+# Show your own profile (no context_id needed)
+client = D4H::API::Client.new(api_key: ENV.fetch("D4H_TOKEN"))
+me = client.whoami.show
+me.name   # => "John Doe"
+me.email  # => "john@example.com"
+
+# Show your team's info (requires context_id)
 team = client.team.show(id: 42)
 team.title       # => "Rocky Mountain Rescue"
 team.timezone    # => "America/Denver"
 team.memberCounts.total        # => 90
 team.memberCounts.operational  # => 85
-
-# Show your own profile
-me = client.whoami.show
-me.name   # => "John Doe"
-me.email  # => "john@example.com"
 
 # Show an organisation
 org = client.organisation.show(id: 5)
@@ -738,7 +745,7 @@ Every resource is accessible as a method on the client. The table below shows wh
 | `whoami` | whoami | | x** | | | |
 
 \* Document update uses PUT instead of PATCH.
-\*\* Whoami `show` takes no arguments — it returns the current authenticated user.
+\*\* Whoami `show` takes no arguments and does not require `context_id` — it hits `v3/whoami` directly to return the current authenticated user.
 
 All resources with `list` also support `list_all` for automatic pagination.
 

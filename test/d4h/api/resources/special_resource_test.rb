@@ -52,10 +52,10 @@ class SpecialResourceTest < Minitest::Test
     assert_equal "Colorado SAR", org.title
   end
 
-  # -- whoami (show with no args) --
+  # -- whoami (show with no args, no context required) --
 
   def test_whoami_show
-    @stubs.get("v3/team/42/whoami") do |_env|
+    @stubs.get("v3/whoami") do |_env|
       json_response({
         "id" => 1,
         "name" => "John Doe",
@@ -69,6 +69,28 @@ class SpecialResourceTest < Minitest::Test
     assert_kind_of D4H::API::Whoami, me
     assert_equal "John Doe", me.name
     assert_equal "john@example.com", me.email
+  end
+
+  def test_whoami_works_without_context_id
+    client = build_client(context_id: nil)
+
+    @stubs.get("v3/whoami") do |_env|
+      json_response({
+        "id" => 1,
+        "name" => "John Doe",
+        "email" => "john@example.com",
+      })
+    end
+
+    me = client.whoami.show
+
+    assert_equal "John Doe", me.name
+  end
+
+  def test_context_resources_raise_without_context_id
+    client = build_client(context_id: nil)
+
+    assert_raises(ArgumentError) { client.member.list }
   end
 
   # -- member (list + update, no create or destroy) --
