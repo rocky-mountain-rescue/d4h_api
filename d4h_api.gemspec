@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require_relative "lib/d4h/api/version"
+
 Gem::Specification.new do |spec|
   spec.name = "d4h_api"
-  spec.version = "2.0.1"
+  spec.version = D4H::API::VERSION
   spec.authors = ["Pawel Osiczko"]
   spec.email = ["p.osiczko@tetrapyloctomy.org"]
   spec.homepage = "https://github.com/rockymountainrescue/d4h_api"
